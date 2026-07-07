@@ -980,7 +980,7 @@
             </div>
         </section>
 
-        <!-- ─── UPDATE INFO & STATUS (MOVED TO TOP) ─── -->
+        <!-- ─── UPDATE INFO & STATUS ─── -->
         <div class="update-info-top fade-in" id="download-section">
             <i class="fas fa-code-branch" style="color:#00ff00; font-size:1.3rem;"></i>
             <span class="version-text" id="release-version"><strong>build:</strong> <span class="loading-dot"></span> fetching...</span>
@@ -1397,6 +1397,28 @@
             updateStatusBadge('loading', 'checking Roblox version...');
 
             try {
+                // First, fetch the latest release for display
+                const latestUrl = 'https://api.github.com/repos/borkeled/Bitware-Releases/releases/latest';
+                const latestResponse = await fetch(latestUrl);
+                let latestTag = 'unknown';
+                let latestDate = new Date();
+
+                if (latestResponse.ok) {
+                    const latestRelease = await latestResponse.json();
+                    latestTag = latestRelease.tag_name || 'unknown';
+                    latestDate = new Date(latestRelease.published_at);
+                }
+
+                const formattedDate = latestDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                document.getElementById('release-version').innerHTML = `<strong>build:</strong> ${latestTag}`;
+                document.getElementById('release-date').innerHTML = `<i class="fas fa-calendar"></i> ${formattedDate}`;
+                document.getElementById('footer-version').textContent = latestTag;
+
+                // Now find a release with Roblox version hash (may be older)
                 const bitwareInfo = await findRobloxVersionFromReleases();
 
                 if (!bitwareInfo) {
@@ -1405,18 +1427,8 @@
                 }
 
                 const bitwareRobloxVersion = bitwareInfo.robloxVersion;
-                const bitwareTag = bitwareInfo.tagName;
-                const bitwareDate = new Date(bitwareInfo.publishedAt);
 
-                const formattedDate = bitwareDate.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                });
-                document.getElementById('release-version').innerHTML = `<strong>build:</strong> ${bitwareTag}`;
-                document.getElementById('release-date').innerHTML = `<i class="fas fa-calendar"></i> ${formattedDate}`;
-                document.getElementById('footer-version').textContent = bitwareTag;
-
+                // Get current Windows Roblox version
                 const currentRobloxVersion = await fetchCurrentRobloxVersion();
 
                 if (!currentRobloxVersion) {
@@ -1424,13 +1436,14 @@
                     return;
                 }
 
+                // Compare versions
                 if (bitwareRobloxVersion === currentRobloxVersion) {
                     updateStatusBadge('working', '');
                 } else {
                     updateStatusBadge('updating', '');
                 }
 
-                console.log(`BitWare (${bitwareTag}) Roblox version: ${bitwareRobloxVersion}`);
+                console.log(`Latest build: ${latestTag} | Roblox version used for check: ${bitwareRobloxVersion}`);
                 console.log(`Current Windows Roblox version: ${currentRobloxVersion}`);
 
             } catch (error) {
