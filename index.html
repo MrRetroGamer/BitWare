@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>BitWare | #1 Free/Keyless Roblox External</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ─── RESET & BASE ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            color: #e0e0e0;
+            line-height: 1.5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 255, 0, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.025) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridPulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes gridPulse {
+            0% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ─── FADE ANIMATIONS ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ─── NAVBAR ─── */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 18px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.12);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideDown 0.8s ease-out forwards;
+        }
+
+        @keyframes slideDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #000;
+            border: 1px solid rgba(0, 255, 0, 0.25);
+            object-fit: cover;
+            box-shadow: 0 0 18px rgba(0, 255, 0, 0.12);
+            transition: box-shadow 0.3s ease;
+        }
+        .logo-img:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.35);
+        }
+
+        .logo-text {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            color: #00ff00;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            animation: glowText 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowText {
+            0% {
+                text-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 35px rgba(0, 255, 0, 0.6);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #00ff00;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a i {
+            color: #00ff00;
+            font-size: 0.85rem;
+        }
+
+        .nav-links a:hover {
+            color: #00ff00;
+        }
+
+        .discord-btn {
+            background: #00ff00;
+            color: #000 !important;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+
+        .discord-btn i {
+            color: #000 !important;
+            font-size: 1.05rem !important;
+        }
+
+        .discord-btn:hover {
+            background: #00cc00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .discord-btn::after {
+            display: none;
+        }
+
+        /* ─── BUTTONS ─── */
+        .btn-primary {
+            background: #00ff00;
+            border: none;
+            color: #000;
+            font-weight: 700;
+            padding: 13px 34px;
+            border-radius: 40px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary i {
+            color: #000;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            background: #00cc00;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            border: 1px solid #00ff00;
+            background: transparent;
+            color: #00ff00;
+            padding: 11px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline i {
+            color: #00ff00;
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 255, 0, 0.08);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.2);
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 55px 0 30px;
+            gap: 45px;
+        }
+
+        .hero-text {
+            flex: 1 1 450px;
+        }
+
+        .hero-badge {
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid rgba(0, 255, 0, 0.25);
+            border-radius: 30px;
+            padding: 8px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #00ff00;
+            font-weight: 500;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            animation: pulseBadge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%,
+            100% {
+                box-shadow: 0 0 0 rgba(0, 255, 0, 0);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            }
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            color: #ffffff;
+        }
+
+        .green-highlight {
+            color: #00ff00;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 28px;
+            max-width: 560px;
+            line-height: 1.6;
+        }
+
+        .hero-visual {
+            flex: 1 1 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            image-rendering: auto;
+        }
+
+        .hero-visual img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.2);
+        }
+
+        /* ─── STATS ROW ─── */
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            margin: 40px 0 45px;
+            justify-content: center;
+        }
+
+        .stat-item {
+            background: #050505;
+            border: 1px solid #1a1a1a;
+            border-radius: 24px;
+            padding: 20px 38px;
+            text-align: center;
+            transition: 0.4s;
+            min-width: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.03), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-item:hover::before {
+            left: 100%;
+        }
+
+        .stat-item:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00ff00;
+        }
+
+        .stat-text {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ─── SECTION HEADERS ─── */
+        .section-header {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 50px 0 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #ffffff;
+        }
+
+        .section-header i {
+            color: #00ff00;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin: -18px 0 32px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* ─── FEATURES GRID ─── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 55px;
+        }
+
+        .feature-card {
+            background: #050505;
+            border: 1px solid #1a1a1a;
+            border-radius: 26px;
+            padding: 28px 24px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 0, 0.04) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover::after {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 35px rgba(0, 255, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-card .card-icon {
+            font-size: 2rem;
+            color: #00ff00;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .feature-card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .feature-badge {
+            font-size: 0.65rem;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-desc {
+            color: #777;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .settings-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .settings-list li {
+            color: #555;
+            font-size: 0.82rem;
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-family: 'Fira Code', monospace;
+            transition: 0.2s;
+            line-height: 1.4;
+        }
+
+        .settings-list li:hover {
+            color: #00ff00;
+        }
+
+        .settings-list li i {
+            color: #00ff00;
+            font-size: 0.7rem;
+            margin-top: 4px;
+            width: 12px;
+            flex-shrink: 0;
+        }
+
+        .config-note {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-family: 'Fira Code', monospace;
+            color: #555;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover .config-note {
+            border-color: rgba(0, 255, 0, 0.3);
+            color: #888;
+        }
+
+        .config-note i {
+            font-size: 0.9rem;
+            color: #00ff00;
+        }
+
+        /* ─── STATUS INDICATOR ─── */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Fira Code', monospace;
+            transition: 0.3s;
+        }
+
+        .status-badge.working {
+            background: rgba(0, 255, 0, 0.12);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+        }
+
+        .status-badge.working i {
+            color: #00ff00;
+        }
+
+        .status-badge.updating {
+            background: rgba(255, 170, 0, 0.12);
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            color: #ffaa00;
+        }
+
+        .status-badge.updating i {
+            color: #ffaa00;
+        }
+
+        .status-badge.failed {
+            background: rgba(255, 0, 0, 0.12);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff4444;
+        }
+
+        .status-badge.failed i {
+            color: #ff4444;
+        }
+
+        .status-badge.loading {
+            background: rgba(100, 100, 100, 0.12);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            color: #888;
+        }
+
+        /* ─── UPDATE INFO (MOVED TO TOP) ─── */
+        .update-info-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+            margin: 10px 0 35px;
+            background: #050505;
+            border-radius: 20px;
+            padding: 16px 24px;
+            align-items: center;
+            border: 1px solid #1a1a1a;
+            transition: 0.3s;
+        }
+
+        .update-info-top:hover {
+            border-color: rgba(0, 255, 0, 0.3);
+        }
+
+        .update-info-top .version-text {
+            color: #888;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .update-info-top .date-text {
+            color: #555;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .update-info-top .status-badge {
+            margin-left: 0;
+        }
+
+        .update-info-top .download-link {
+            color: #00ff00;
+            text-decoration: underline;
+            font-family: 'Fira Code', monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+
+        .update-info-top .download-link:hover {
+            color: #00cc00;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        /* ─── TESTIMONIALS ─── */
+        .testimonial-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 30px 0 60px;
+        }
+
+        .testimonial-card {
+            background: #050505;
+            border-radius: 24px;
+            padding: 24px;
+            flex: 1 1 250px;
+            border: 1px solid #1a1a1a;
+            transition: 0.4s;
+        }
+
+        .testimonial-card:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .stars i {
+            color: #00ff00;
+            margin-right: 2px;
+        }
+
+        .placeholder-quote {
+            color: #555;
+            font-style: italic;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        .user-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff00;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .testimonial-card:hover .user-avatar {
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+
+        .user-placeholder-name {
+            color: #555;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+        }
+
+        /* ─── INFO GRID ─── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin: 25px 0 45px;
+        }
+
+        .info-block {
+            background: #050505;
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid #1a1a1a;
+            transition: 0.4s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-block.clickable {
+            cursor: pointer;
+        }
+
+        .info-block::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #00ff00;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .info-block.clickable:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-block.clickable:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .info-block i {
+            color: #00ff00;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .info-block.clickable:hover i {
+            transform: scale(1.15);
+        }
+
+        .info-block h4 {
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .info-block p {
+            color: #555;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            border-top: 1px solid #1a1a1a;
+            padding: 35px 0 25px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            color: #555;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer a:hover {
+            color: #00ff00;
+        }
+
+        .loading-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ─── PARTICLES ─── */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 750px) {
+            .hero-text h1 {
+                font-size: 2.6rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                gap: 18px;
+            }
+            .update-info-top {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .update-info-top .status-badge {
+                margin-left: 0;
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="particles-container" id="particles"></div>
+
+    <div class="container">
+
+        <!-- ─── NAVBAR ─── -->
+        <nav class="navbar">
+            <div class="logo-area">
+                <img src="https://cdn.discordapp.com/icons/1463757750562455554/13c7f0074374c80455f0a3e9aa5ccdad.webp?size=1024" alt="BitWare logo" class="logo-img" />
+                <span class="logo-text">BitWare</span>
+            </div>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#features"><i class="fas fa-cog"></i> Features</a>
+                <a href="#download-section"><i class="fas fa-download"></i> Download</a>
+                <a href="https://discord.gg/jaAARMAGyr" target="_blank" class="discord-btn"><i class="fab fa-discord"></i> Discord</a>
+            </div>
+        </nav>
+
+        <!-- ─── HERO ─── -->
+        <section class="hero">
+            <div class="hero-text fade-in-left">
+                <div class="hero-badge">
+                    <i class="fas fa-check-circle"></i> free and keyless, always
+                </div>
+                <h1>
+                    <span class="green-highlight">#1 Free & Keyless</span><br />Roblox External
+                </h1>
+                <p class="hero-description">
+                    BitWare is a clean usermode external that just works. Smooth aim assist, clear visuals, and your settings stay saved locally. No keys, no accounts, no hassle.
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                    <a href="https://cdn.discordapp.com/attachments/1501064294874218710/1523846235155599480/BitWare_Bootstrapper.exe?ex=6a4d97e6&is=6a4c4666&hm=9d47ec88cb055d127cdeaf159003b93c572e30f7bf09d3e645cf1a8f0d219569&" class="btn-primary" download><i class="fas fa-download"></i> <span>Download Bootstrapper</span></a>
+                    <a href="#" class="btn-outline"><i class="fas fa-book"></i> Docs (coming soon)</a>
+                </div>
+                <div style="margin-top: 28px; display: flex; gap: 28px; color: #555; font-size: 0.9rem; flex-wrap: wrap; font-family: 'Fira Code', monospace;" id="hero-meta">
+                    <span><i class="fas fa-microchip"></i> usermode external</span>
+                </div>
+            </div>
+            <div class="hero-visual fade-in-right">
+                <img src="Preview.png" alt="BitWare Preview" style="max-width: 100%; height: auto; display: block; border-radius: 16px; image-rendering: auto;" />
+            </div>
+        </section>
+
+        <!-- ─── UPDATE INFO & STATUS (MOVED TO TOP) ─── -->
+        <div class="update-info-top fade-in" id="download-section">
+            <i class="fas fa-code-branch" style="color:#00ff00; font-size:1.3rem;"></i>
+            <span class="version-text" id="release-version"><strong>build:</strong> <span class="loading-dot"></span> fetching...</span>
+            <span class="date-text" id="release-date"><i class="fas fa-calendar"></i> fetching...</span>
+            <span style="color:#555; font-family:'Fira Code', monospace; font-size:0.9rem;"><i class="fas fa-check-circle"></i> free and keyless</span>
+            <span id="status-badge-container" style="display:inline-flex; align-items:center;">
+                <span class="status-badge loading" id="status-badge">
+                    <i class="fas fa-spinner fa-spin"></i> checking...
+                </span>
+            </span>
+            <a href="https://cdn.discordapp.com/attachments/1501064294874218710/1523846235155599480/BitWare_Bootstrapper.exe?ex=6a4d97e6&is=6a4c4666&hm=9d47ec88cb055d127cdeaf159003b93c572e30f7bf09d3e645cf1a8f0d219569&" class="download-link" download>
+                <i class="fas fa-download"></i> bootstrapper
+            </a>
+        </div>
+
+        <!-- ─── STATS ROW ─── -->
+        <div class="stats-row fade-in">
+            <div class="stat-item">
+                <div class="stat-number">free</div>
+                <div class="stat-text">no keys ever</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">local</div>
+                <div class="stat-text">config saved</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-bolt"></i></div>
+                <div class="stat-text">fast updates</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-shield"></i></div>
+                <div class="stat-text">usermode</div>
+            </div>
+        </div>
+
+        <!-- ─── FEATURES SECTION ─── -->
+        <div class="section-header fade-in" id="features">
+            <i class="fas fa-cubes"></i> Features and Settings
+        </div>
+        <p class="section-subtitle fade-in">everything is customizable with individual hotkeys</p>
+
+        <div class="features-grid">
+
+            <!-- Aimbot -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Aimbot <span class="feature-badge">core</span></h3>
+                <p class="feature-desc">Smooth, humanized aim that tracks targets naturally. Full control over every aspect of how it locks on and follows.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Smoothing slider from snappy to super gradual</li>
+                    <li><i class="fas fa-chevron-right"></i> Customizable FOV circle size and color</li>
+                    <li><i class="fas fa-chevron-right"></i> Target hitbox options like head, torso, lower torso, or random</li>
+                    <li><i class="fas fa-chevron-right"></i> Wall check toggle to only aim at visible targets</li>
+                    <li><i class="fas fa-chevron-right"></i> Sticky aim that stays locked after first acquisition</li>
+                    <li><i class="fas fa-chevron-right"></i> Legit mode for more natural sticky aim movement</li>
+                    <li><i class="fas fa-chevron-right"></i> No distance limit, works across the entire map</li>
+                    <li><i class="fas fa-chevron-right"></i> Shake intensity for subtle jitter that looks believable</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom activation hotkey</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-sliders-h"></i> all settings saved in local config
+                </div>
+            </div>
+
+            <!-- Silent Aim -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-ghost"></i></div>
+                <h3>Silent Aim <span class="feature-badge">stealth</span></h3>
+                <p class="feature-desc">Hit targets without your crosshair ever moving on screen. The enemy takes damage but your aim stays perfectly still visually.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Instant bullet redirection to target hitbox</li>
+                    <li><i class="fas fa-chevron-right"></i> No visible camera movement, completely undetectable</li>
+                    <li><i class="fas fa-chevron-right"></i> Works alongside regular aimbot or independently</li>
+                    <li><i class="fas fa-chevron-right"></i> Hitbox selection for head, torso, or lower torso</li>
+                    <li><i class="fas fa-chevron-right"></i> Wall check for legitimate looking hits</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom activation hotkey</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-eye-slash"></i> silent but deadly
+                </div>
+            </div>
+
+            <!-- Player ESP -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                <h3>Player ESP <span class="feature-badge">visuals</span></h3>
+                <p class="feature-desc">See every player through walls with fully customizable overlays. Choose exactly what information you want to see and how it looks.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Box styles like 2D, corner, filled, or outline only</li>
+                    <li><i class="fas fa-chevron-right"></i> Name display to show player usernames above boxes</li>
+                    <li><i class="fas fa-chevron-right"></i> Health bar with percentage, horizontal or vertical</li>
+                    <li><i class="fas fa-chevron-right"></i> Distance indicator to see how far away they are</li>
+                    <li><i class="fas fa-chevron-right"></i> Team based color picker with separate colors per team</li>
+                    <li><i class="fas fa-chevron-right"></i> Distance limit slider up to 500 studs</li>
+                    <li><i class="fas fa-chevron-right"></i> Skeleton ESP to see bone positions in real time</li>
+                    <li><i class="fas fa-chevron-right"></i> Snaplines that draw lines from you to each player</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom activation hotkey</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-palette"></i> fully customizable colors and styles
+                </div>
+            </div>
+
+            <!-- Triggerbot -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-fingerprint"></i></div>
+                <h3>Triggerbot <span class="feature-badge">auto</span></h3>
+                <p class="feature-desc">Automatically fires the moment your crosshair passes over an enemy. Fast, reliable, and completely configurable to your timing needs.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Adjustable delay between shots from instant to delayed</li>
+                    <li><i class="fas fa-chevron-right"></i> Toggle mode that stays active until turned off</li>
+                    <li><i class="fas fa-chevron-right"></i> Hold mode that only fires while key is held down</li>
+                    <li><i class="fas fa-chevron-right"></i> Team check to avoid friendly fire situations</li>
+                    <li><i class="fas fa-chevron-right"></i> Works with any weapon type automatically</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom activation hotkey</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-clock"></i> adjustable timing for any playstyle
+                </div>
+            </div>
+
+            <!-- Speedhack -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <h3>Speedhack <span class="feature-badge">movement</span></h3>
+                <p class="feature-desc">Move faster than normally possible. Adjust your speed on the fly without any jittery or glitchy movement.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Speed multiplier from subtle boosts to extreme speed</li>
+                    <li><i class="fas fa-chevron-right"></i> Smooth acceleration with no teleporting or snapping</li>
+                    <li><i class="fas fa-chevron-right"></i> Works while walking, sprinting, and in the air</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom activation hotkey</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-running"></i> smooth movement boost
+                </div>
+            </div>
+
+            <!-- Click Teleport -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-mouse-pointer"></i></div>
+                <h3>Click Teleport <span class="feature-badge">mobility</span></h3>
+                <p class="feature-desc">Point anywhere on your screen and teleport there instantly. Cross the map in a single click with precision placement.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Teleport to cursor position on click</li>
+                    <li><i class="fas fa-chevron-right"></i> Works at any distance with no range limit</li>
+                    <li><i class="fas fa-chevron-right"></i> Safe landing detection to avoid getting stuck</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom activation hotkey plus click combo</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-map-pin"></i> instant repositioning
+                </div>
+            </div>
+
+            <!-- Skybox Changer -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-cloud-sun"></i></div>
+                <h3>Skybox Changer <span class="feature-badge">visuals</span></h3>
+                <p class="feature-desc">Completely transform the look of your game by changing the skybox. Pick from a variety of presets or use your own custom skybox images.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Multiple skybox presets included</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom skybox support with your own images</li>
+                    <li><i class="fas fa-chevron-right"></i> Real-time switching with no reload needed</li>
+                    <li><i class="fas fa-chevron-right"></i> Works in any game mode</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom activation hotkey</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-image"></i> change the sky with a single click
+                </div>
+            </div>
+
+            <!-- Config System -->
+            <div class="feature-card fade-in-scale">
+                <div class="card-icon"><i class="fas fa-save"></i></div>
+                <h3>Config System <span class="feature-badge">local</span></h3>
+                <p class="feature-desc">Every single setting saves automatically to a local file. Switch between profiles or reset everything with one click. Clean, modern UI to manage it all.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Auto saves every change instantly</li>
+                    <li><i class="fas fa-chevron-right"></i> Portable config.json to take settings anywhere</li>
+                    <li><i class="fas fa-chevron-right"></i> Multiple profile slots planned for the future</li>
+                    <li><i class="fas fa-chevron-right"></i> Reset to defaults with one button</li>
+                    <li><i class="fas fa-chevron-right"></i> Clean, beautiful UI with a green on black theme</li>
+                    <li><i class="fas fa-chevron-right"></i> Every module has its own activation hotkey</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-file-alt"></i> config.json, portable, beautiful UI
+                </div>
+            </div>
+
+            <!-- More coming! -->
+            <div class="feature-card fade-in-scale" style="border-color: rgba(0, 255, 0, 0.15);">
+                <div class="card-icon"><i class="fas fa-plus-circle"></i></div>
+                <h3>And More! <span class="feature-badge">coming soon</span></h3>
+                <p class="feature-desc">We're constantly adding new features and improvements. Here's a taste of what's on the horizon.</p>
+                <ul class="settings-list">
+                    <li><i class="fas fa-chevron-right"></i> Chams and glow effects</li>
+                    <li><i class="fas fa-chevron-right"></i> Fly and noclip</li>
+                    <li><i class="fas fa-chevron-right"></i> Infinite jump and fall damage bypass</li>
+                    <li><i class="fas fa-chevron-right"></i> Custom crosshair overlays</li>
+                    <li><i class="fas fa-chevron-right"></i> And much more in active development</li>
+                </ul>
+                <div class="config-note">
+                    <i class="fas fa-rocket"></i> always evolving, always free
+                </div>
+            </div>
+
+        </div><!-- /features-grid -->
+
+        <!-- ─── COMMUNITY ─── -->
+        <div class="section-header fade-in">
+            <i class="fas fa-comments"></i> Community
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card fade-in-scale">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="placeholder-quote">[user review placeholder, text here]</p>
+                <div class="user-meta">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-placeholder-name">[username placeholder]</div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in-scale">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="placeholder-quote">[user review placeholder, text here]</p>
+                <div class="user-meta">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-placeholder-name">[username placeholder]</div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in-scale">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="placeholder-quote">[user review placeholder, text here]</p>
+                <div class="user-meta">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-placeholder-name">[username placeholder]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── INFO GRID ─── -->
+        <div class="info-grid fade-in">
+            <a href="https://cdn.discordapp.com/attachments/1501064294874218710/1523846235155599480/BitWare_Bootstrapper.exe?ex=6a4d97e6&is=6a4c4666&hm=9d47ec88cb055d127cdeaf159003b93c572e30f7bf09d3e645cf1a8f0d219569&" class="info-block clickable" download>
+                <i class="fas fa-download"></i>
+                <h4>Download</h4>
+                <p>bootstrapper .exe</p>
+            </a>
+            <div class="info-block">
+                <i class="fas fa-desktop"></i>
+                <h4>Platform</h4>
+                <p>Windows 10 / 11</p>
+            </div>
+            <div class="info-block">
+                <i class="fas fa-unlock-alt"></i>
+                <h4>License</h4>
+                <p>free and keyless</p>
+            </div>
+            <a href="https://discord.gg/jaAARMAGyr" target="_blank" class="info-block clickable">
+                <i class="fas fa-headset"></i>
+                <h4>Support</h4>
+                <p>Discord</p>
+            </a>
+        </div>
+
+        <!-- ─── FOOTER ─── -->
+        <div class="footer">
+            <div style="font-family:'Fira Code', monospace;">&copy; 2026 BitWare</div>
+            <div style="display:flex; gap:30px; flex-wrap:wrap;">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="https://discord.gg/jaAARMAGyr" target="_blank"><i class="fab fa-discord"></i> discord.gg/jaAARMAGyr</a>
+            </div>
+            <div style="color:#333; font-family:'Fira Code', monospace;" id="footer-version">fetching version...</div>
+        </div>
+
+    </div><!-- /container -->
+
+    <!-- ─── SCRIPTS ─── -->
+    <script>
+        const BOOTSTRAPPER_URL =
+            "https://cdn.discordapp.com/attachments/1501064294874218710/1523846235155599480/BitWare_Bootstrapper.exe?ex=6a4d97e6&is=6a4c4666&hm=9d47ec88cb055d127cdeaf159003b93c572e30f7bf09d3e645cf1a8f0d219569&";
+
+        // ── Intersection Observer for fade-ins ──
+        const observerOptions = {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ── Particles ──
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 25;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                const size = Math.random() * 3 + 1;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 12 + 15;
+                const delay = Math.random() * 18;
+
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = left + '%';
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay = delay + 's';
+
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ── Extract Roblox version from release description ──
+        function extractRobloxVersion(body) {
+            const match = body.match(/Roblox version:\s*(version-[a-f0-9]+)/i);
+            if (match) return match[1];
+            const fallbackMatch = body.match(/version-[a-f0-9]{16,}/i);
+            return fallbackMatch ? fallbackMatch[0] : null;
+        }
+
+        // ── Fetch ALL releases and find the first one with a Roblox version ──
+        async function findRobloxVersionFromReleases() {
+            try {
+                const url = 'https://api.github.com/repos/borkeled/Bitware-Releases/releases?per_page=100';
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('GitHub API request failed');
+
+                const releases = await response.json();
+
+                for (const release of releases) {
+                    const body = release.body || '';
+                    const version = extractRobloxVersion(body);
+                    if (version) {
+                        return {
+                            robloxVersion: version,
+                            tagName: release.tag_name,
+                            publishedAt: release.published_at
+                        };
+                    }
+                }
+
+                return null;
+            } catch (error) {
+                console.error('Failed to fetch releases:', error);
+                return null;
+            }
+        }
+
+        // ── Fetch current Windows Roblox version from WEAO API ──
+        async function fetchCurrentRobloxVersion() {
+            try {
+                const response = await fetch('https://weao.xyz/api/versions/current', {
+                    headers: {
+                        'User-Agent': 'WEAO-3PService'
+                    }
+                });
+                if (!response.ok) throw new Error('WEAO API request failed');
+
+                const data = await response.json();
+                if (data.Windows && typeof data.Windows === 'string') {
+                    return data.Windows;
+                }
+                return null;
+            } catch (error) {
+                console.error('Failed to fetch current Roblox version:', error);
+                return null;
+            }
+        }
+
+        // ── Update status badge ──
+        function updateStatusBadge(status, message) {
+            const badge = document.getElementById('status-badge');
+            if (!badge) return;
+
+            badge.classList.remove('working', 'updating', 'failed', 'loading');
+
+            if (status === 'working') {
+                badge.classList.add('working');
+                badge.innerHTML = `<i class="fas fa-check-circle"></i> Working`;
+            } else if (status === 'updating') {
+                badge.classList.add('updating');
+                badge.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Needs Update`;
+            } else if (status === 'failed') {
+                badge.classList.add('failed');
+                badge.innerHTML = `<i class="fas fa-times-circle"></i> ${message || 'Status unknown'}`;
+            } else {
+                badge.classList.add('loading');
+                badge.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${message || 'checking...'}`;
+            }
+        }
+
+        // ── Main status check ──
+        async function checkRobloxCompatibility() {
+            const badge = document.getElementById('status-badge');
+            if (!badge) return;
+
+            updateStatusBadge('loading', 'checking Roblox version...');
+
+            try {
+                const bitwareInfo = await findRobloxVersionFromReleases();
+
+                if (!bitwareInfo) {
+                    updateStatusBadge('failed', 'No Roblox version found in any release');
+                    return;
+                }
+
+                const bitwareRobloxVersion = bitwareInfo.robloxVersion;
+                const bitwareTag = bitwareInfo.tagName;
+                const bitwareDate = new Date(bitwareInfo.publishedAt);
+
+                const formattedDate = bitwareDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                document.getElementById('release-version').innerHTML = `<strong>build:</strong> ${bitwareTag}`;
+                document.getElementById('release-date').innerHTML = `<i class="fas fa-calendar"></i> ${formattedDate}`;
+                document.getElementById('footer-version').textContent = bitwareTag;
+
+                const currentRobloxVersion = await fetchCurrentRobloxVersion();
+
+                if (!currentRobloxVersion) {
+                    updateStatusBadge('failed', 'Could not fetch current Roblox version');
+                    return;
+                }
+
+                if (bitwareRobloxVersion === currentRobloxVersion) {
+                    updateStatusBadge('working', '');
+                } else {
+                    updateStatusBadge('updating', '');
+                }
+
+                console.log(`BitWare (${bitwareTag}) Roblox version: ${bitwareRobloxVersion}`);
+                console.log(`Current Windows Roblox version: ${currentRobloxVersion}`);
+
+            } catch (error) {
+                console.error('Status check failed:', error);
+                updateStatusBadge('failed', 'Error checking status');
+            }
+        }
+
+        // ── Init ──
+        document.addEventListener('DOMContentLoaded', () => {
+            checkRobloxCompatibility();
+        });
+    </script>
+
+</body>
+</html>
